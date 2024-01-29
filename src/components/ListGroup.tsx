@@ -1,19 +1,40 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { MouseEvent } from "react";
 
-function ListGroup() {
-  let cities = ["New York", "Sylhet", "Dhaka", "Delhi", "Mumbai"];
-  cities = [];
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectedItem: (item: string) => void;
+}
+function ListGroup({ items, heading, onSelectedItem }: Props) {
+  //items = [];
   const getMassages = () => {
-    return cities.length === 0 ? "No cities found!" : null;
+    return items.length === 0 && "No cities found!";
   };
+  //hook
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  //event handeler
+  //const handelClick = (event: MouseEvent) => console.log(event);
   return (
     <>
       {/* <Fragment> */}
-      <h3>List Group:</h3>
+      <h3>{heading}</h3>
       {getMassages()}
       <ul className="list-group">
-        {cities.map((item) => (
-          <li key={item} className="list-group-item">
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex == index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectedItem(item);
+            }}
+          >
             {item}
           </li>
         ))}
