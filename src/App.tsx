@@ -1,5 +1,6 @@
 //import Message from "./Message";
 import ListGroup from "./components/ListGroup";
+import { Alert } from "./components/Alert";
 
 function App() {
   let counties = ["India", "Bangladesh", "Japan", "USA", "UK"];
@@ -10,6 +11,7 @@ function App() {
   };
   return (
     <div>
+      <Alert>Hello World!</Alert>
       <ListGroup
         items={counties}
         heading="Counties"
